@@ -1,0 +1,7 @@
+//.prettierignore 
+**/*.min.js
+**/*.min.css
+
+node_modules/
+dist/
+build/
