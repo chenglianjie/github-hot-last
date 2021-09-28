@@ -48,16 +48,5 @@
     "husky": "^7.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,less,md}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
   }
 }
