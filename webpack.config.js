@@ -121,6 +121,6 @@ module.exports = {
     // 是否开启代码压缩
     compress: true,
     // 启动的端口
-    port: 9000,
+    port: 8888,
   },
 }
