@@ -46,12 +46,21 @@
   button {
     height: 40px;
     width: 80px;
+    position: relative;
+    top: -4px;
   }
   .Player-title {
     margin-bottom: 10px;
   }
 }
-
+input::-webkit-input-placeholder {
+  font-size: 16px;
+  padding: 10px;
+}
+// input.custom {
+//   padding-left: 10px;
+//   caret-color: red;
+// }
 .battle-item-img-box {
   margin-bottom: 20px;
   //   border: 1px solid red;
@@ -91,4 +100,7 @@
 }
 button {
   cursor: pointer;
+}
+input {
+  text-indent: 5px;
 }
