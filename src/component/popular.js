@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import ReactDom from 'react-dom'
 import InfiniteScroll from 'react-infinite-scroller'
+import { Spin } from 'antd'
 import { getPopularData } from '../request/request' // 请求接口
+import { UserOutlined, StarFilled, ForkOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import './style/loading.less'
 import './style/polular.less'
-import axios from 'axios'
 const Polular = () => {
   let apiArr = [
     'https://api.github.com/search/repositories?q=stars:%3E1&sort=stars&order=desc&type=Repositories&page=1',
@@ -13,7 +14,6 @@ const Polular = () => {
     'https://api.github.com/search/repositories?q=stars:%3E1+language:java&sort=stars&order=desc&type=Repositories&page=1',
     'https://api.github.com/search/repositories?q=stars:%3E1+language:css&sort=stars&order=desc&type=Repositories&page=1',
   ]
-  // https://developer.github.com/v3/search/#search-repositorie
   const [title, setTitle] = useState([
     { name: 'All', checked: true, id: 0 },
     { name: 'JavaScript', checked: false, id: 1 },
@@ -22,7 +22,7 @@ const Polular = () => {
     { name: 'CSS', checked: false, id: 4 },
   ]) // 头部标题
   const [listData, setListData] = useState([]) // list渲染数据
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false) // loading状态
   const [hasMore, setHasMore] = useState(true) // 是否开启下拉加载
   const [count, setCount] = useState(30) // 下拉加载
   const [page, setPage] = useState(1) // 页码
@@ -30,7 +30,6 @@ const Polular = () => {
   const [initPage, setInitPage] = useState(1)
   // 加载更多数据
   const loadMoreData = async () => {
-    console.log('我执行了')
     if (listData.length >= count) {
       setHasMore(false)
       return
@@ -51,30 +50,26 @@ const Polular = () => {
     return api
   }
   //   点击标题切换
-  const clickTitle = (id, name) => {
-    setPage(1)
-    setInitPage(2)
-    setLanguage(name)
-    setLoading(true)
+  const clickTitle = async (id, name) => {
     const arr = [...title]
     arr.forEach(item => {
       item.checked = false
     })
     arr.forEach(item => {
-      if (item.id === id) {
-        item.checked = true
-      }
+      item.checked = item.id === id
     })
-    setTitle(arr)
-    try {
-      axios.get(apiArr[id]).then(res => {
-        setListData(res.data.items)
-        setLoading(false)
-      })
-    } catch (error) {
-      console.error(error)
+    ReactDom.unstable_batchedUpdates(() => {
+      setPage(1)
+      setInitPage(2)
+      setLanguage(name)
+      setLoading(true)
+      setTitle(arr)
+    })
+    const { items } = await getPopularData(apiArr[id])
+    ReactDom.unstable_batchedUpdates(() => {
+      setListData(items)
       setLoading(false)
-    }
+    })
   }
   return (
     <div className={loading ? 'box box-grey' : 'box'}>
@@ -106,7 +101,7 @@ const Polular = () => {
         hasMore={hasMore} // 是否继续监听滚动事件 true 监听 | false 不再监听
         loader={
           <div className='loader' key={0}>
-            正在加载 Loading ...
+            正在加载 Loading <Spin />
           </div>
         }
       >
@@ -122,19 +117,19 @@ const Polular = () => {
                   <a href={item.svn_url}>{item.full_name}</a>
                 </div>
                 <div className='name'>
-                  <i className='fas fa-user icon-i' style={{ color: 'rgb(255, 191, 116)' }}></i>
+                  <UserOutlined style={{ color: 'rgb(255, 191, 116)' }} />
                   <a href={item.html_url}>{item.name}</a>
                 </div>
                 <div>
-                  <i className='fas fa-star icon-i' style={{ color: 'rgb(255, 215, 0)' }}></i>
+                  <StarFilled style={{ color: 'rgb(255, 215, 0)' }} />
                   {item.stargazers_count} starts
                 </div>
                 <div>
-                  <i className='fas fa-code-branch icon-i' style={{ color: 'rgb(129, 195, 245)' }}></i>
+                  <ForkOutlined style={{ color: 'rgb(129, 195, 245)' }} />
                   {item.forks_count} forks
                 </div>
                 <div>
-                  <i className='fas fa-exclamation-triangle icon-i' style={{ color: 'rgb(241, 138, 147)' }}></i>
+                  <ExclamationCircleOutlined style={{ color: 'rgb(241, 138, 147)' }} />
                   {item.open_issues_count} Open issues
                 </div>
               </div>
