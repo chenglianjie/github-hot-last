@@ -4,3 +4,4 @@ public
 webpack.config.js
 postcss.config.js
 lint-staged.config.js
+config

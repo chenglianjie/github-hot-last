@@ -5,8 +5,8 @@
   "license": "MIT",
   "homepage": "./",
   "scripts": {
-    "start": "webpack serve",
-    "build": "webpack",
+    "start": "webpack serve --config config/webpack.dev.js",
+    "build": "webpack --config config/webpack.prd.js",
     "deploy": "gh-pages -d build",
     "fix": "prettier --write src/ & eslint --fix src/",
     "prepare": "husky install"
@@ -42,7 +42,8 @@
     "sass-loader": "^12.1.0",
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.3.0"
+    "webpack-dev-server": "^4.3.0",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
