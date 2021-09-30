@@ -7,7 +7,7 @@ module.exports = merge(common, {
   mode: 'production',
   entry: './src/index.js',
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/../dist',
     // [contenthash:8] - 本应用打包输出文件级别的更新，导致输出文件名变化
     filename: '[name]-[contenthash:8].js',
     // 编译前清除目录
