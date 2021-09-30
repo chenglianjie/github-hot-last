@@ -21,8 +21,8 @@ const Result = props => {
     return false
   }
   useEffect(() => {
-    const plaayer1 = getQueryVariable('player1')
-    const plaayer2 = getQueryVariable('player2')
+    const plaayer1 = getQueryVariable('player1') ? getQueryVariable('player1') : props?.location?.state?.plaayer1
+    const plaayer2 = getQueryVariable('player2') ? getQueryVariable('player2') : props?.location?.state?.plaayer2
     if (plaayer1 && plaayer2) {
       ;(async () => {
         setLoading(true)
