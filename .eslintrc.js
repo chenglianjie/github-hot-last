@@ -16,15 +16,8 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    'import',
-    {
-      libraryName: 'antd',
-      style: true,
-    },
-  ],
+  plugins: ['react'],
   rules: {
-    'no-unused-vars': 0,
+    // 'no-unused-vars': 0,
   },
 }
