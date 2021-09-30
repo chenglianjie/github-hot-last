@@ -8,13 +8,6 @@ module.exports = merge(common, {
     type: 'filesystem', // 使用文件缓存
   },
   entry: './src/index.js',
-  output: {
-    path: __dirname + '/dist',
-    // [contenthash:8] - 本应用打包输出文件级别的更新，导致输出文件名变化
-    filename: '[name].js',
-    // 编译前清除目录
-    clean: true,
-  },
   devServer: {
     historyApiFallback: true,
     open: true, // 自动打开页面

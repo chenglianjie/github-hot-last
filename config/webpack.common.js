@@ -6,6 +6,7 @@ const chalk = require('chalk')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin') // 编译进度条
 module.exports = {
   resolve: {
+    // 配置路径别名
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
@@ -18,7 +19,7 @@ module.exports = {
         use: 'babel-loader',
       },
       {
-        test: /\.(sa|sc|le|c)ss$/,
+        test: /\.(le|c)ss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -27,18 +28,6 @@ module.exports = {
           'postcss-loader',
           // 当解析antd.less，必须写成下面格式，否则会报Inline JavaScript is not enabled错误
           { loader: 'less-loader', options: { lessOptions: { javascriptEnabled: true } } },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              keepQuery: true,
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
         ],
       },
       {
