@@ -12,7 +12,7 @@ const Battle = props => {
   const [showPlayer1Img2, setShowPlayer1Img2] = useState(true) // 玩家二是否显示图片
   const [p1Img, setP1Img] = useState('') // 玩家一的图片
   const [p1Img2, setP1Img2] = useState('') // 玩家二的图片
-  const [loading, setLoading] = useState(false) // loading状态
+  const [loading, setLoading] = useState(false) // 玩家一loading状态
   // 玩家一确认按钮
   const plaayer1Sumit = async () => {
     if (plaayer1) {
@@ -21,8 +21,8 @@ const Battle = props => {
       if (avatar_url) {
         setShowPlayer1Img(false)
         setP1Img(avatar_url)
-        setLoading(false)
       }
+      setLoading(false)
     } else {
       message.warning('Player不能为空')
     }
@@ -31,19 +31,23 @@ const Battle = props => {
   const plaayer2Sumit = async () => {
     if (plaayer2) {
       setLoading(true)
-      const { avatar_url } = await getResultData(`https://api.github.com/users/${plaayer1}`)
+      const { avatar_url } = await getResultData(`https://api.github.com/users/${plaayer2}`)
       if (avatar_url) {
         setP1Img2(avatar_url)
         setShowPlayer1Img2(false)
-        setLoading(false)
       }
+      setLoading(false)
     } else {
       message.warning('Player不能为空')
     }
   }
   // 点击战斗按钮
   const clickBattle = () => {
-    props.history.push({ pathname: '/result', state: { plaayer1, plaayer2 }, search: `?${plaayer1}&${plaayer2}` })
+    props.history.push({
+      pathname: '/result',
+      state: { plaayer1, plaayer2 },
+      search: `?player1=${plaayer1}&player2=${plaayer2}`,
+    })
   }
   return (
     <div>

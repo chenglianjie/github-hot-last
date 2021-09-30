@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ReactDom from 'react-dom'
 import InfiniteScroll from 'react-infinite-scroller'
 import { Spin } from 'antd'
@@ -66,10 +66,14 @@ const Polular = () => {
       setTitle(arr)
     })
     const { items } = await getPopularData(apiArr[id])
-    ReactDom.unstable_batchedUpdates(() => {
-      setListData(items)
+    if (items) {
+      ReactDom.unstable_batchedUpdates(() => {
+        setListData(items)
+        setLoading(false)
+      })
+    } else {
       setLoading(false)
-    })
+    }
   }
   return (
     <div className={loading ? 'box box-grey' : 'box'}>
