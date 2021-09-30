@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import { UsergroupAddOutlined, TrophyOutlined, RocketOutlined } from '@ant-design/icons'
+import { UsergroupAddOutlined, TrophyOutlined, RocketOutlined, CloseCircleFilled } from '@ant-design/icons'
 import { getResultData } from '../request/request'
 import { message, Button, Spin } from 'antd'
 import './style/battle.less'
@@ -110,7 +110,7 @@ const Battle = props => {
                   }}
                   className='player-close'
                 >
-                  X
+                  <CloseCircleFilled style={{ color: 'red', fontFamily: 100 }} />
                 </div>
               </div>
             </Spin>
@@ -152,7 +152,7 @@ const Battle = props => {
                   }}
                   className='player-close'
                 >
-                  X
+                  <CloseCircleFilled style={{ color: 'red', fontFamily: 100 }} />
                 </div>
               </div>
             </Spin>
