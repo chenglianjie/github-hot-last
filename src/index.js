@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom'
-import Polular from './component/popular'
-import Battle from './component/battle'
-import Result from './component/result'
+//  react 组件懒加载
+const Polular = React.lazy(() => import('./component/popular'))
+const Battle = React.lazy(() => import('./component/battle'))
+const Result = React.lazy(() => import('./component/result'))
 import './component/style/index.css'
 
 function App() {
@@ -20,15 +21,17 @@ function App() {
             </NavLink>
           </div>
           <Switch>
-            <Route path='/battle'>
-              <Battle />
-            </Route>
-            <Route path='/result'>
-              <Result />
-            </Route>
-            <Route path='/'>
-              <Polular />
-            </Route>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Route path='/battle'>
+                <Battle />
+              </Route>
+              <Route path='/result'>
+                <Result />
+              </Route>
+              <Route path='/'>
+                <Polular />
+              </Route>
+            </Suspense>
           </Switch>
         </div>
       </Router>
