@@ -8,6 +8,7 @@ const Result = React.lazy(() => import('./component/result'))
 import './component/style/index.css'
 
 function App() {
+  // let a = 5
   return (
     <div className='box'>
       <Router>
@@ -28,7 +29,7 @@ function App() {
               <Route path='/result'>
                 <Result />
               </Route>
-              <Route path='/'>
+              <Route exact path='/'>
                 <Polular />
               </Route>
             </Suspense>
