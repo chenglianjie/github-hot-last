@@ -23,6 +23,7 @@ module.exports = {
     },
   },
   rules: {
+    // 'eslint-loader'
     // 'no-unused-vars': 0,
   },
 }

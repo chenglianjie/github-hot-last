@@ -5,6 +5,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin') // css抽离
 const chalk = require('chalk')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin') // 编译进度条
 module.exports = {
+  output: {
+    path: __dirname + '/../dist',
+    // [contenthash:8] - 本应用打包输出文件级别的更新，导致输出文件名变化
+    filename: '[name]-[contenthash:8].js',
+    // 编译前清除目录
+    clean: true,
+  },
   resolve: {
     // 配置路径别名
     alias: {
@@ -17,6 +24,10 @@ module.exports = {
       {
         test: /\.jsx?$/,
         use: 'babel-loader',
+      },
+      {
+        test: /\.js$/,
+        use: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /\.(le|c)ss$/,

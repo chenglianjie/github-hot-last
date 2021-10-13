@@ -6,13 +6,7 @@ const common = require('./webpack.common')
 module.exports = merge(common, {
   mode: 'production',
   entry: './src/index.js',
-  output: {
-    path: __dirname + '/../dist',
-    // [contenthash:8] - 本应用打包输出文件级别的更新，导致输出文件名变化
-    filename: '[name]-[contenthash:8].js',
-    // 编译前清除目录
-    clean: true,
-  },
+
   //terser-webpack-plugin 默认开启了 parallel: true 配置，并发运行的默认数量： os.cpus().length - 1 ，
   //  配置的 parallel 数量为 4，使用多进程并发运行压缩以提高构建速度。
   optimization: {

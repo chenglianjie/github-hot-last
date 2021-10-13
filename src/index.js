@@ -6,9 +6,7 @@ const Polular = React.lazy(() => import('./component/popular'))
 const Battle = React.lazy(() => import('./component/battle'))
 const Result = React.lazy(() => import('./component/result'))
 import './component/style/index.css'
-
 function App() {
-  // let a = 5
   return (
     <div className='box'>
       <Router>
